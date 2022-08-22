@@ -1,0 +1,82 @@
+@import "./breakpoint.sass"
+
+.header-basic 
+    @include sm
+        width : 180%
+    @include xs 
+        width : 210%
+    @include ms 
+        width : 110%
+    @include md 
+        width : 105%
+
+h1
+    font-family : Bitter, Georgia, serif
+    font-size: 2.25em
+    padding: 0 1em
+
+h1  
+    font-size : 3.2em
+    font-weight : 250
+    letter-spacing : .01em
+    padding : 2rem 0 0 3.5rem  
+    text-shadow : .022em .022em .022em #111
+    color : #000
+    @include md
+        font-size : 2.0em
+        width : 100%
+        padding : 1rem 0 0 1rem
+       
+
+svg
+    display : inline-block
+    position : absolute
+    top : 0
+    left : 0
+    @include sm
+        width : 180%
+  
+       
+.container
+    display : inline-block
+    position : absolute
+    width : 100%
+    padding-bottom : 25%
+    vertical-align : middle
+    top: 0
+    left: 0
+    
+    @include md 
+        width : 105%
+
+    @include ms 
+        width : 110%
+
+    @include xs 
+        width : 130%
+
+    @include sm 
+        margin-left : auto
+        margin-right : auto
+        padding : 0 20px
+        max-width : 1500px
+        
+       
+    @include lg 
+        margin-left : auto
+        margin-right : auto
+        max-width : 500px
+       
+
+    @include md 
+        margin-left : auto
+        margin-right : auto
+        max-width : 1100px
+       
+    @include xl
+        margin-left : auto
+        margin-right : auto
+        max-width : 1340px
+    
+    
+    

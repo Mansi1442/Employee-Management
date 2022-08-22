@@ -1,0 +1,209 @@
+{
+
+    "login": [{
+        "email": "ss@gmail.com",
+        "password": "ss123456"
+    }],
+    "Employee": [{
+            "id": 3,
+            "name": "Archie",
+            "email": "archie@gmail.com",
+            "number": "9999999999",
+            "birthday": "12/12/1980",
+            "position": "Accountant"
+        },
+        {
+            "id": 2,
+            "name": "Archana",
+            "email": "archana@gmail.com",
+            "number": "7676565645",
+            "birthday": "11/11/1980",
+            "position": "System Architect"
+        },
+        {
+            "id": 1,
+            "name": "Aashish",
+            "email": "ashish@gmail.com",
+            "number": "8888888888",
+            "birthday": "29/11/1989",
+            "position": "Sales Assistant"
+        },
+        {
+            "id": 4,
+            "name": "Brinda",
+            "email": "brinda@gmail.com",
+            "number": "7777777777",
+            "birthday": "13/07/1970",
+            "position": "Marketing Designer"
+        },
+        {
+            "id": 5,
+            "name": "Biren",
+            "email": "biren@gmail.com",
+            "number": "7878789895",
+            "birthday": "26/09/1975",
+            "position": "Sales Assistant"
+        },
+        {
+            "id": 6,
+            "name": "Bhumi",
+            "email": "bhumi12@gmail.com",
+            "number": "6666666666",
+            "birthday": "09/04/2000",
+            "position": "Software Engineer"
+        },
+        {
+            "id": 7,
+            "name": "Dhruvi",
+            "email": "dhruviii@gmail.com",
+            "number": "5555555555",
+            "birthday": "08/05/2004",
+            "position": "Marketing Designer"
+        },
+        {
+            "id": 8,
+            "name": "Dinesh",
+            "email": "dinesh@gmail.com",
+            "number": "4444444444",
+            "birthday": "07/06/1993",
+            "position": "Software Engineer"
+        },
+        {
+            "id": 9,
+            "name": "Geeta",
+            "email": "geeta@gmail.com",
+            "number": "3333333333",
+            "birthday": "19/09/1993",
+            "position": "Marketing Designer"
+        },
+        {
+            "id": 10,
+            "name": "Govind",
+            "email": "govind@gmail.com",
+            "number": "2222222222",
+            "birthday": "23/08/2004",
+            "position": "Senior Javascript Developer"
+        },
+        {
+            "id": 11,
+            "name": "Harsha",
+            "email": "harsha@gmail.com",
+            "number": "1111111111",
+            "birthday": "28/12/1990",
+            "position": "Regional Director"
+        },
+        {
+            "id": 12,
+            "name": "Jay",
+            "email": "jay@gmail.com",
+            "number": "9825346347",
+            "birthday": "30/04/1999",
+            "position": "System Architect"
+        },
+        {
+            "id": 13,
+            "name": "Jennifer",
+            "email": "jenni@gmail.com",
+            "number": "9697989594",
+            "birthday": "10/10/1982",
+            "position": "Marketing Designer"
+        },
+        {
+            "id": 14,
+            "name": "Kaumil",
+            "email": "kaumil@gmail.com",
+            "number": "7987654321",
+            "birthday": "21/06/1977",
+            "position": "System Architect"
+        },
+        {
+            "id": 15,
+            "name": "Kuntal",
+            "email": "kuntal@gmail.com",
+            "number": "2345678098",
+            "birthday": "06/09/1996",
+            "position": "Regional Director"
+        },
+        {
+            "id": 16,
+            "name": "Lata",
+            "email": "lata@gmail.com",
+            "number": "9080706050",
+            "birthday": "23/08/2005",
+            "position": "Senior Javascript Developer"
+        },
+        {
+            "id": 17,
+            "name": "Mani",
+            "email": "mani@gmail.com",
+            "number": "9010203040",
+            "birthday": "12/09/1995",
+            "position": "Systems Administrator"
+        },
+        {
+            "id": 18,
+            "name": "Mahek",
+            "email": "mahek@gmail.com",
+            "number": "9040503060",
+            "birthday": "05/01/2001",
+            "position": "Software Engineer"
+        },
+        {
+            "id": 19,
+            "name": "Mitesh",
+            "email": "mitesh@gmail.com",
+            "number": "9988776560",
+            "birthday": "04/08/1992",
+            "position": "Senior Marketing Designer"
+        },
+        {
+            "id": 20,
+            "name": "Naresh",
+            "email": "naresh@gmail.com",
+            "number": "9933226560",
+            "birthday": "11/02/1993",
+            "position": "Regional Director"
+        },
+        {
+            "id": 21,
+            "name": "Nidhi",
+            "email": "nidhi@gmail.com",
+            "number": "9988776561",
+            "birthday": "03/07/1992",
+            "position": "Systems Administrator"
+        },
+        {
+            "id": 22,
+            "name": "Paresh",
+            "email": "paresh@gmail.com",
+            "number": "9988776560",
+            "birthday": "02/08/2002",
+            "position": "Senior Marketing Designer"
+        },
+        {
+            "id": 23,
+            "name": "Pankti",
+            "email": "pankti@gmail.com",
+            "number": "8877659960",
+            "birthday": "09/06/2006",
+            "position": "Senior Javascript Developer"
+        },
+
+        {
+            "id": 24,
+            "name": "Satish",
+            "email": "satis@gmail.com",
+            "number": "9988785451",
+            "birthday": "12/02/2003",
+            "position": "Regional Director"
+        },
+        {
+            "id": 25,
+            "name": "Tisha",
+            "email": "tisha@gmail.com",
+            "number": "9877545199",
+            "birthday": "01/12/2002",
+            "position": "Sales Assistant"
+        }
+    ]
+}

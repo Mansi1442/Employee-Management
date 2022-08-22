@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<div class="login-box">
+	<ul class="links-group">
+		<li class="link active"><a class="button" routerLink="/login" >Sign In</a></li>
+		<li class="link"><a  class="button" routerLink="/signup" >Sign Up</a></li>
+	</ul>
+    <h4>All ready have an Account?Welcome back!</h4>
+    <form [formGroup]="addUserForm" (ngSubmit)="submitUser()">
+        <div class="field-wrap">
+            <label id="label_signupEmail">Email Address<span class="req">*</span></label>
+            <input type="email" name="signupEmail" id="signupEmail" autocomplete="off"  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid) }" >
+            <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid)">
+                <div *ngIf="addUserForm.controls['email'].errors?.['required']">Email is required</div>
+                <div *ngIf="addUserForm.controls['email'].errors?.['pattern']">Enter valid email</div>
+            </div>
+        </div>
+
+        <div class="top-row">
+            <div class="field-wrap">
+                <label id="label_signupPass">Password<span class="req">*</span></label>
+                <input type="password" name="signupPass" id="signupPass" autocomplete="off"  formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['password'].errors) || (!addUserForm.controls['password'].pristine && addUserForm.controls['password'].invalid) }" >
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['password'].errors) || (!addUserForm.controls['password'].pristine && addUserForm.controls['password'].invalid)">
+                    <div *ngIf="addUserForm.controls['password'].errors?.['required']">Password is required</div>
+                    <div *ngIf="addUserForm.controls['password'].errors?.['minLength']">Minimum 8 characters required</div>
+    
+                </div>
+            </div>
+
+        
+        </div>
+		<p  *ngIf="showMsg">Invalid Id Password </p>
+		<p  *ngIf="passwordWrong">Invalid  Password </p>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-success btn-sm">Submit</button>
+        </div>
+        <a class="fp" routerLink="/forgotpass">Forgot Password? </a>
+       
+
+    </form>
+</div>  
+
+
+

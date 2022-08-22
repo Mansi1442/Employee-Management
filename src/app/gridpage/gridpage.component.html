@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<div class="overlay">
+<div class="grid" >
+    <div class="unit w-1-3">
+        <div class="sidebar">
+            <a class="active" routerLink="/landigpage">Home</a>
+            <a routerLink="/news">News</a>
+            <a routerLink="/contact">Contact</a>
+            <a routerLink="/about">About</a>
+        </div>
+    </div>
+
+    <div class="unit w-2-3">
+        <div class="main">
+            <div class="table_wrapper">
+                <h1>Candidate Data </h1>
+                <div class="table_search">
+                    <!-- <span class="input_search"><i class="fas fa-search"></i></span> -->
+                    <input id="input" class="form-control" type="text" name="name" [(ngModel)]="name" (ngModelChange)="search()" placeholder="Search Here" autocomplete="off" >
+                </div>
+                <div class="table_length">
+                    Itemsper page:
+                    <select (change)="PageSizeChange($event)" class="selector">
+                    <option *ngFor="let size of pageSizes" [ngValue]="size">{{size}}</option>
+                  </select>
+                </div>
+                
+
+                <table>
+                    <thead class="header">
+                        <tr>
+                            <th (click)="sortName('name')">Name &nbsp;<i *ngIf="!this.reverse" class="fas fa-sort-up"></i><i *ngIf="this.reverse" class="fas fa-sort-down"></i> </th>
+                            <th (click)="sortEmail('emailid')">EmailId &nbsp;<i *ngIf="!this.reverse"  class="fas fa-sort-up"></i> <i *ngIf="this.reverse" class="fas fa-sort-down"></i></th>
+                            <th (click)="sortContact('contactno')  ">ContactNo &nbsp;<i *ngIf="!this.reverse"  class="fas fa-sort-up"></i> <i *ngIf="this.reverse" class="fas fa-sort-down"></i></th>
+                            <th  > BirthDay &nbsp;  <i (click)="sortAscenBirthday()"  *ngIf="!ascendingBirthday"  class="fas fa-sort-up"></i> <i (click)="sortDsceBirthday()" *ngIf="ascendingBirthday"  class="fas fa-sort-down"></i></th>
+                            <th (click)="sortPosition('position')"> Position &nbsp;<i *ngIf="!this.reverse"  class="fas fa-sort-up"></i> <i *ngIf="this.reverse" class="fas fa-sort-down"></i></th>
+                            <th> Action </th> 
+                        </tr>
+                    </thead>
+                    <p class="msg" *ngIf="employees.length === 0"> {{msg}} </p>
+                    <tbody  >
+                        <tr *ngFor="let employee of employees | filter:name   | orderBy : key : reverse  |  paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+            };  ">
+
+
+                            <td>{{employee.name }}</td>
+                            <td>{{employee.email  }}</td>
+                            <td>{{employee.number   }}</td>
+                            <td>{{employee.birthday |date:"dd-MM-yyyy"   }}</td>
+                            <td>{{employee.position  }}</td>
+                            <td>
+                                <div class="btns">
+                                    <button type="button"  class="btn btn-info" (click)="openEditPopup(employee)"><i class="far fa-edit"></i>
+                      </button>
+                                    <button type="button"  class="btn btn-danger" (click)="openDeletePopup(employee)"><i class="far fa-trash-alt"></i>
+                      </button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class="table_add">
+                    <button type="button" class="button"  (click)="openPopup()"><span>Create Candidate</span></button>
+                </div>
+                <div class="table_paginate">
+                    <pagination-controls previousLabel="Prev"   responive="true" nextLabel="Next" (pageChange)="PageChange($event)"></pagination-controls>
+                </div>
+
+                <!-- <div class="table_paginate">
+                    <pagination-controls  previousLabel="Prev" responive="true" nextLabel="Next" (pageChange)="PageChange($event)"></pagination-controls>
+                </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal"  *ngIf="showPopup">
+    <div class="modal-content">
+        <button class="close" (click)="closePopup()">&times;</button>
+        <div class="container">
+            <form [formGroup]="addUserForm"  (ngSubmit)="submitCandidate()">
+
+                <label>Name</label>
+                <input type="text" formControlName="name" placeholder="Enter Your Name" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['name'].errors) || (!addUserForm.controls['name'].pristine && addUserForm.controls['name'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['name'].errors) || (!addUserForm.controls['name'].pristine && addUserForm.controls['name'].invalid)">
+                    <div *ngIf="addUserForm.controls['name'].errors?.['required']">Name is required</div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['pattern']">Enter valid name </div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['minLength']">Name must be in 3-12 Character </div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['maxLength']">Name must be in 3-12 Character</div>
+                </div>
+
+                <label> Email</label>
+                <input type="text" formControlName="email" placeholder="Enter Your Email" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid)">
+                    <div *ngIf="addUserForm.controls['email'].errors?.['required']">Email is required</div>
+                    <div *ngIf="addUserForm.controls['email'].errors?.['pattern']">Enter valid email</div>
+                </div>
+
+                <label for="number">ContactNo:</label>
+                <input type="number" formControlName="number" placeholder="Enter Your Number" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['number'].errors) || (!addUserForm.controls['number'].pristine && addUserForm.controls['number'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['number'].errors) || (!addUserForm.controls['number'].pristine && addUserForm.controls['number'].invalid)">
+                    <div *ngIf="addUserForm.controls['number'].errors?.['required']">Number is required</div>
+                    <div *ngIf="addUserForm.controls['number'].errors?.['pattern']">Enter valid Number</div>
+                </div>
+
+
+                <label>Birthday:</label>
+                <input type="date" name="birthday" min="1960-01-01" max="2005-01-01" formControlName="birthday" class="form-control"  [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['birthday'].errors) || (!addUserForm.controls['birthday'].pristine && addUserForm.controls['birthday'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['birthday'].errors) || (!addUserForm.controls['birthday'].pristine && addUserForm.controls['birthday'].invalid)">
+                    <div *ngIf="addUserForm.controls['birthday'].errors?.['required']">BirthDay is required</div>
+
+                </div>
+
+                <label>Position</label>
+                <input type="text" formControlName="position" placeholder="Enter Your Position" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['position'].errors) || (!addUserForm.controls['position'].pristine && addUserForm.controls['position'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['position'].errors) || (!addUserForm.controls['position'].pristine && addUserForm.controls['position'].invalid)">
+                    <div *ngIf="addUserForm.controls['position'].errors?.['required']">Position is required</div>
+                </div>
+
+            </form>
+
+            <div id="myModalBtn" class="row">
+                <div class="add1">
+                    <button type="submit" class="btnadd"   (click)="submitCandidate()">Submit</button>
+
+                </div>
+                <div class="add2">
+                    <button type="button" class="btnadd" (click)="closePopup()">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<div id="myModal" class="modal" *ngIf="editPopup">
+    <div class="modal-content">
+        <button class="close" (click)="closePopup()">&times;</button>
+        <div class="container">
+            <form [formGroup]="addUserForm" (ngSubmit)="editCandidate()">
+
+                <label>Name</label>
+                <input type="text" formControlName="name" placeholder="Enter Your Name" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['name'].errors) || (!addUserForm.controls['name'].pristine && addUserForm.controls['name'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['name'].errors) || (!addUserForm.controls['name'].pristine && addUserForm.controls['name'].invalid)">
+                    <div *ngIf="addUserForm.controls['name'].errors?.['required']">Name is required</div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['pattern']">Enter valid name </div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['minLength']">Name must be in 3-12 Character </div>
+                    <div *ngIf="addUserForm.controls['name'].errors?.['maxLength']">Name must be in 3-12 Character</div>
+                </div>
+
+                <label> Email</label>
+                <input type="text" formControlName="email" placeholder="Enter Your Email" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['email'].errors) || (!addUserForm.controls['email'].pristine && addUserForm.controls['email'].invalid)">
+                    <div *ngIf="addUserForm.controls['email'].errors?.['required']">Email is required</div>
+                    <div *ngIf="addUserForm.controls['email'].errors?.['pattern']">Enter valid email</div>
+                </div>
+
+                <label for="number">ContactNo:</label>
+                <input type="number" formControlName="number" placeholder="Enter Your Number" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['number'].errors) || (!addUserForm.controls['number'].pristine && addUserForm.controls['number'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['number'].errors) || (!addUserForm.controls['number'].pristine && addUserForm.controls['number'].invalid)">
+                    <div *ngIf="addUserForm.controls['number'].errors?.['required']">ContactNo is required</div>
+                    <div *ngIf="addUserForm.controls['number'].errors?.['pattern']">Enter valid ContactNo</div>
+                </div>
+
+
+                <label>Birthday:</label>
+                <input id="requestdate" type="date" name="birthday" min="1960-01-01" max="2005-01-01"  formControlName="birthday" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['birthday'].errors) || (!addUserForm.controls['birthday'].pristine && addUserForm.controls['birthday'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['birthday'].errors) || (!addUserForm.controls['birthday'].pristine && addUserForm.controls['birthday'].invalid)">
+                    <div *ngIf="addUserForm.controls['birthday'].errors?.['required']">BirthDay is required</div>
+
+                </div>
+
+                <label>Position</label>
+                <input type="text" formControlName="position" placeholder="Enter Your Position" class="form-control" [ngClass]="{ 'is-invalid': (isFormSubmitted && addUserForm.controls['position'].errors) || (!addUserForm.controls['position'].pristine && addUserForm.controls['position'].invalid) }">
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && addUserForm.controls['position'].errors) || (!addUserForm.controls['position'].pristine && addUserForm.controls['position'].invalid)">
+                    <div *ngIf="addUserForm.controls['position'].errors?.['required']">Position is required</div>
+                </div>
+                <div id="myModalBtn" class="row">
+                    <div class="edit1">
+                        <button type="submit" class="btnedit"  >Update</button>
+                    </div>
+                    <div class="edit2">
+                        <button type="button " class="btnedit" (click)="closePopup()">close</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div id="myModal " class="modal " *ngIf="deletePopup">
+
+
+    <div class="modal-content">
+        <button class="close" (click)="closePopup()">&times;</button>
+        <p>Are You Sure Want to Delete {{candidatename}} ?</p>
+        <div id="myModalBtn " class="row">
+            <div class="del1">
+                <button type="submit " class="btndel" (click)="deleteCandidate()" >Delete</button>
+            </div>
+            <div class="del2">
+                <button type="button " class="btndel " (click)="closePopup() ">Cancle</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
