@@ -19,7 +19,7 @@ const routes: Routes = [
   {path :'contact',component:ContactComponent,canActivate:[AuthGuard]},
   {path:'news',component : NewsComponent,canActivate:[AuthGuard]},
   {path: 'landingpage', component: LandingpageComponent, canActivate: [AuthGuard] },
-  {path:'',component:LoginComponent}
+  {path:'',component: LoginComponent}
 ];
 
 @NgModule({
